@@ -2,6 +2,7 @@ import mill._
 import mill.define.Target
 import mill.scalalib._
 import mill.util.Loose
+import sameWithin.expectedAkka
 
 
 val akkaActor2511 = ivy"com.typesafe.akka::akka-actor:2.5.11"
@@ -13,19 +14,23 @@ trait BaseModule extends ScalaModule{
 
   val scalaVersion = "2.12.4"
 
+  def expectedAkka: String
+
   def validateDeps = T{
     compileClasspath.map{ cp =>
-      val akkaDeps = cp.map(_.path.segments.last).filter(_.contains("akka"))
-      if(akkaDeps.size == 1){
+      val akkaDeps = cp.map(_.path.segments.last).filter(_.contains("akka-actor"))
+      if(akkaDeps == Agg(expectedAkka)){
         println("OK")
       }else{
-        sys.error(s"Multiple akka dependencies found: $akkaDeps")
+        sys.error(s"Expected $expectedAkka but found: $akkaDeps")
       }
     }
   }
 }
 
 object sameWithin extends BaseModule {
+
+  val expectedAkka = "akka-actor_2.12-2.5.10.jar"
 
   override def ivyDeps: Target[Loose.Agg[Dep]] = Agg(
     akkaActor259,
@@ -35,6 +40,8 @@ object sameWithin extends BaseModule {
 
 object sameTransitive extends BaseModule {
 
+  val expectedAkka = "akka-actor_2.12-2.5.10.jar"
+
   override def ivyDeps: Target[Loose.Agg[Dep]] = Agg(
     akkaStream259,
     akkaActor2510
@@ -42,6 +49,9 @@ object sameTransitive extends BaseModule {
 }
 
 object moduleTransitive extends BaseModule {
+
+  val expectedAkka = "akka-actor_2.12-2.5.10.jar"
+
   override def moduleDeps = super.moduleDeps ++ Seq(
     sameWithin
   )
@@ -49,6 +59,4 @@ object moduleTransitive extends BaseModule {
   override def ivyDeps: Target[Loose.Agg[Dep]] = Agg(
     akkaActor2511
   )
-
-
 }
