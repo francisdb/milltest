@@ -50,7 +50,7 @@ object sameTransitive extends BaseModule {
 
 object moduleTransitive extends BaseModule {
 
-  val expectedAkka = "akka-actor_2.12-2.5.10.jar"
+  val expectedAkka = "akka-actor_2.12-2.5.11.jar"
 
   override def moduleDeps = super.moduleDeps ++ Seq(
     sameWithin

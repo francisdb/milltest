@@ -15,7 +15,7 @@ OK
 ➜  milltest git:(master) ✗ mill moduleTransitive.validateDeps
 [39/39] moduleTransitive.validateDeps
 1 targets failed
-moduleTransitive.validateDeps java.lang.RuntimeException: Expected akka-actor_2.12-2.5.10.jar but found: Agg(akka-actor_2.12-2.5.10.jar, akka-actor_2.12-2.5.11.jar)
+moduleTransitive.validateDeps java.lang.RuntimeException: Expected akka-actor_2.12-2.5.11.jar but found: Agg(akka-actor_2.12-2.5.10.jar, akka-actor_2.12-2.5.11.jar)
     scala.sys.package$.error(package.scala:27)
     ammonite.$file.build$BaseModule.$anonfun$validateDeps$2(build.sc:25)
     ammonite.$file.build$BaseModule.$anonfun$validateDeps$2$adapted(build.sc:20)
