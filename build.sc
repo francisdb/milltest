@@ -2,8 +2,6 @@ import mill._
 import mill.define.Target
 import mill.scalalib._
 import mill.util.Loose
-import sameWithin.expectedAkka
-
 
 val akkaActor2511 = ivy"com.typesafe.akka::akka-actor:2.5.11"
 val akkaActor2510 = ivy"com.typesafe.akka::akka-actor:2.5.10"
